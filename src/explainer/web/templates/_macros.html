@@ -1,0 +1,16 @@
+{% macro status_badge(status) -%}
+<span class="badge {{ status }}">{{ {"rendered": "rendered", "stale": "stale", "missing": "not rendered", "invalid": "invalid"}[status] }}</span>
+{%- endmacro %}
+
+{% macro video_card(p, v) -%}
+<a class="card video fmt-{{ v.format }}" href="/p/{{ p.slug }}/v/{{ v.slug }}">
+  <div class="thumb">
+    {% if v.thumb %}<img src="{{ v.thumb }}" alt="" loading="lazy">{% else %}<div class="placeholder">no render yet</div>{% endif %}
+  </div>
+  <div class="meta">
+    <strong>{{ v.title }}</strong>
+    <div class="sub">{{ v.slug }} · {{ v.format }}{% if v.info %} · {{ v.info.duration|secs }}{% endif %}{% if v.scenes %} · {{ v.scenes }} scenes{% endif %}</div>
+    {{ status_badge(v.status) }}
+  </div>
+</a>
+{%- endmacro %}

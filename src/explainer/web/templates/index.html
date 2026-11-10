@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_badge %}
+{% block content %}
+<h1>Projects</h1>
+{% if not projects %}
+  <p class="empty">No projects found in <code>{{ root }}</code>. Create one with <code>explainer init NAME</code>.</p>
+{% endif %}
+<div class="grid projects">
+  {% for item in projects %}
+  <a class="card project" href="/p/{{ item.ref.slug }}">
+    <div class="thumb wide">
+      {% if item.thumb %}<img src="{{ item.thumb }}" alt="" loading="lazy">{% else %}<div class="placeholder">no renders yet</div>{% endif %}
+    </div>
+    <div class="meta">
+      <strong>{{ item.ref.meta.name }}</strong>
+      <div class="sub">{{ item.ref.slug }} · template {{ item.ref.meta.template }}</div>
+      {% if item.ref.meta.description %}<p>{{ item.ref.meta.description }}</p>{% endif %}
+      <div class="sub">{{ item.videos|length }} videos · {{ item.n_rendered }} rendered · {{ item.n_assets }} assets</div>
+      {% for t in item.ref.meta.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

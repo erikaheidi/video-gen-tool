@@ -1,0 +1,7 @@
+name: Git Tips
+description: Bite-sized Git tips in 4:5 portrait for feeds. Text-only, no image assets.
+template: git-light
+format: portrait
+branding:
+  handle: '@erikaheidi'
+tags: [git, tips]

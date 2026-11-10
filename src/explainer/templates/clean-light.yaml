@@ -1,0 +1,29 @@
+name: clean-light
+description: Light, editorial look — off-white background, near-black text, blue accent, serif headlines. Works in every format.
+formats: [vertical, square, portrait]
+theme:
+  colors: { background: "#f8f5ef", text: "#111827", accent: "#2563eb", muted: "#6b7280", panel: "#ffffff" }
+  fonts: { heading: NotoSerif-Bold, body: NotoSans-Regular }
+  sizes: { title: 96, subtitle: 50, body: 56, caption: 40, stat: 260, handle: 32 }
+  padding: 96
+defaults:
+  duration: 4
+  transition: { type: smoothleft, duration: 0.5 }
+  text_animation: fade-in
+layouts:
+  title:   { align: left, valign: middle, accent_bar: true }
+  text:    { align: left, valign: middle }
+  bullets: { align: left, valign: middle, bullet: "•", stagger: 0.45 }
+  image:   { align: left, valign: bottom, panel: true, panel_opacity: 0.9 }
+  image-caption: { align: left, valign: top }
+  split:   { align: left, valign: middle }
+  quote:   { align: left, valign: middle }
+  stat:    { align: left, valign: middle }
+  outro:   { align: center, valign: middle }
+branding: { position: bottom-center, opacity: 0.7 }
+outro:
+  - id: follow
+    layout: outro
+    duration: 3
+    title: Thanks for watching
+    subtitle: "{handle}"

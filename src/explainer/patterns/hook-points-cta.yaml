@@ -1,0 +1,35 @@
+# pattern: hook-points-cta
+# when: general explainers — "what is X / why X matters". The default choice.
+# shape: hook (title) -> context (text) -> 3 points (bullets, staggered) -> payoff (stat or text) -> CTA (title)
+# length: 5 scenes + template outro, ~20-25s
+version: 1
+title: "TITLE"
+scenes:
+  - id: hook
+    layout: title
+    duration: 3
+    title: A question or bold claim with one *accent* word
+  - id: context
+    layout: text
+    duration: 4
+    title: Kicker
+    body: One sentence that defines the topic in plain words.
+  - id: points
+    layout: bullets
+    duration: 5
+    title: Why it matters
+    text_animation: stagger
+    bullets:
+      - First short point
+      - Second short point
+      - Third short point
+  - id: payoff
+    layout: stat
+    duration: 3.5
+    value: "3x"
+    caption: one-line proof or outcome
+  - id: cta
+    layout: title
+    duration: 3
+    title: Start with *one* small step
+    subtitle: What the viewer should do next

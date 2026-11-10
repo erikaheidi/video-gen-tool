@@ -1,0 +1,41 @@
+# pattern: problem-solution
+# when: pitching a tool, practice or fix. Pain first, then relief.
+# shape: hook -> pain (text) -> cost of pain (stat) -> solution (title or split) -> how (bullets) -> CTA
+# length: 6 scenes + outro, ~25-30s
+version: 1
+title: "TITLE"
+scenes:
+  - id: hook
+    layout: title
+    duration: 3
+    title: Still doing X *by hand*?
+  - id: pain
+    layout: text
+    duration: 4
+    title: The problem
+    body: Describe the pain the viewer feels, in one sentence.
+  - id: cost
+    layout: stat
+    duration: 3.5
+    title: The cost
+    value: "40%"
+    caption: of time lost to the problem
+  - id: solution
+    layout: title
+    duration: 3
+    title: Meet *the fix*
+    subtitle: One line naming the solution
+  - id: how
+    layout: bullets
+    duration: 5
+    title: How it works
+    text_animation: stagger
+    bullets:
+      - Step or benefit one
+      - Step or benefit two
+      - Step or benefit three
+  - id: cta
+    layout: title
+    duration: 3
+    title: Try it *today*
+    subtitle: Link in bio

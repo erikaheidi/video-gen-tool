@@ -1,0 +1,40 @@
+# pattern: myth-vs-fact
+# when: correcting misconceptions. Alternate MYTH / FACT text scenes; hard cuts feel punchy.
+# shape: hook -> (myth, fact) x 2-3 -> takeaway -> CTA
+version: 1
+title: "TITLE"
+scenes:
+  - id: hook
+    layout: title
+    duration: 3
+    title: "*2* myths about X"
+  - id: myth-1
+    layout: text
+    duration: 3.5
+    title: MYTH
+    body: The common misconception.
+    style: { title_color: "#f87171" }
+  - id: fact-1
+    layout: text
+    duration: 4
+    title: FACT
+    body: What is actually true, with *the key word* highlighted.
+    transition: { type: slideleft, duration: 0.35 }
+    style: { title_color: "#4ade80" }
+  - id: myth-2
+    layout: text
+    duration: 3.5
+    title: MYTH
+    body: Another misconception.
+    style: { title_color: "#f87171" }
+  - id: fact-2
+    layout: text
+    duration: 4
+    title: FACT
+    body: The correction.
+    transition: { type: slideleft, duration: 0.35 }
+    style: { title_color: "#4ade80" }
+  - id: takeaway
+    layout: title
+    duration: 3
+    title: Now you *know*

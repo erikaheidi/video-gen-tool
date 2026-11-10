@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_badge %}
+{% block title %}{{ v.title }} · {{ p.meta.name }}{% endblock %}
+{% block crumbs %}<a href="/">projects</a> / <a href="/p/{{ p.slug }}">{{ p.slug }}</a> / <span>{{ v.slug }}</span>{% endblock %}
+{% block content %}
+<div class="video-layout">
+  <section class="player fmt-{{ v.format }}">
+    {% if video_url %}
+      <video src="{{ video_url }}" controls playsinline loop preload="metadata" {% if v.thumb %}poster="{{ v.thumb }}"{% endif %}></video>
+      <div class="links">
+        <a href="{{ video_url }}" download>download mp4</a>
+        <a href="/p/{{ p.slug }}/v/{{ v.slug }}/render.json">render.json</a>
+        {% if preview_url %}<a href="{{ preview_url }}">preview render</a>{% endif %}
+      </div>
+    {% else %}
+      <div class="placeholder tall">Not rendered yet.<br><code>explainer render {{ p.slug }} {{ v.slug }}</code></div>
+    {% endif %}
+  </section>
+
+  <section class="details">
+    <h1>{{ v.title }}</h1>
+    {{ status_badge(v.status) }}
+    {% if v.status == "stale" %}<p class="note">The script, template or assets changed since the last render.</p>{% endif %}
+    {% if resolved and resolved.description %}<p class="lead">{{ resolved.description }}</p>{% endif %}
+    <dl class="facts">
+      {% if resolved %}
+      <dt>template</dt><dd>{{ resolved.template }}</dd>
+      <dt>format</dt><dd>{{ resolved.format }} ({{ resolved.width }}×{{ resolved.height }}, {{ resolved.fps }} fps)</dd>
+      <dt>length</dt><dd>{{ resolved.total_duration|secs }} · {{ resolved.scenes|length }} scenes</dd>
+      {% endif %}
+      {% if v.info %}<dt>rendered</dt><dd>{{ v.info.rendered_at|dt }}</dd>{% endif %}
+    </dl>
+
+    {% if diag.errors or diag.warnings %}
+    <div class="diag">
+      {% for e in diag.errors %}<div class="err">{{ e }}</div>{% endfor %}
+      {% for w in diag.warnings %}<div class="warn">{{ w }}</div>{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if scenes %}
+    <h2>Scenes</h2>
+    <table class="scenes">
+      <thead><tr><th>#</th><th>id</th><th>layout</th><th>time</th><th>text</th></tr></thead>
+      <tbody>
+      {% for s in scenes %}
+        <tr class="origin-{{ s.origin }}" data-start="{{ '%.2f'|format(s.start) }}">
+          <td>{{ loop.index }}</td>
+          <td><code>{{ s.id }}</code>{% if s.origin != "video" %} <span class="tag">{{ s.origin }}</span>{% endif %}</td>
+          <td>{{ s.layout }}{% if s.transition %}<div class="sub">{{ s.transition }} in</div>{% endif %}</td>
+          <td class="time"><a href="#" class="seek" data-t="{{ '%.2f'|format(s.start) }}">{{ '%.1f'|format(s.start) }}s</a><div class="sub">{{ s.duration }}s</div></td>
+          <td>{% for t in s.text %}<div>{{ t }}</div>{% endfor %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    {% if stills %}
+    <h2>Stills</h2>
+    <div class="stills fmt-{{ v.format }}">{% for s in stills %}<a href="{{ s }}" target="_blank" rel="noopener"><img src="{{ s }}" alt="" loading="lazy"></a>{% endfor %}</div>
+    {% endif %}
+
+    <h2>Script <span class="sub">videos/{{ v.slug }}.yaml</span></h2>
+    <pre class="yaml"><code>{{ source }}</code></pre>
+  </section>
+</div>
+<script>
+  // jump the player to a scene when its start time is clicked (view-only convenience)
+  document.querySelectorAll("a.seek").forEach(a => a.addEventListener("click", e => {
+    e.preventDefault();
+    const v = document.querySelector("video");
+    if (v) { v.currentTime = parseFloat(a.dataset.t); v.play(); }
+  }));
+</script>
+{% endblock %}

@@ -1,0 +1,875 @@
+{
+  "$defs": {
+    "Background": {
+      "additionalProperties": false,
+      "properties": {
+        "color": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Color"
+        },
+        "image": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Image"
+        },
+        "overlay": {
+          "default": 0.0,
+          "description": "Darkening tint over the image (0..1)",
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Overlay",
+          "type": "number"
+        },
+        "overlay_color": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Overlay Color"
+        },
+        "motion": {
+          "default": "none",
+          "enum": [
+            "none",
+            "zoom-in",
+            "zoom-out",
+            "pan-left",
+            "pan-right"
+          ],
+          "title": "Motion",
+          "type": "string"
+        },
+        "focus": {
+          "default": [
+            0.5,
+            0.5
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Focus",
+          "type": "array"
+        }
+      },
+      "title": "Background",
+      "type": "object"
+    },
+    "Branding": {
+      "additionalProperties": false,
+      "properties": {
+        "handle": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Handle"
+        },
+        "logo": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Project-relative path to a logo image",
+          "title": "Logo"
+        },
+        "position": {
+          "default": "bottom-center",
+          "enum": [
+            "top-left",
+            "top-right",
+            "bottom-left",
+            "bottom-right",
+            "bottom-center",
+            "top-center"
+          ],
+          "title": "Position",
+          "type": "string"
+        },
+        "opacity": {
+          "default": 0.85,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Opacity",
+          "type": "number"
+        },
+        "show_on_scenes": {
+          "default": true,
+          "description": "Show the watermark on every scene (not just the outro)",
+          "title": "Show On Scenes",
+          "type": "boolean"
+        }
+      },
+      "title": "Branding",
+      "type": "object"
+    },
+    "Colors": {
+      "additionalProperties": false,
+      "properties": {
+        "background": {
+          "default": "#0f172a",
+          "title": "Background",
+          "type": "string"
+        },
+        "text": {
+          "default": "#f8fafc",
+          "title": "Text",
+          "type": "string"
+        },
+        "accent": {
+          "default": "#facc15",
+          "title": "Accent",
+          "type": "string"
+        },
+        "muted": {
+          "default": "#94a3b8",
+          "title": "Muted",
+          "type": "string"
+        },
+        "panel": {
+          "default": "#1e293b",
+          "title": "Panel",
+          "type": "string"
+        }
+      },
+      "title": "Colors",
+      "type": "object"
+    },
+    "Defaults": {
+      "additionalProperties": false,
+      "properties": {
+        "duration": {
+          "default": 4.0,
+          "exclusiveMinimum": 0,
+          "title": "Duration",
+          "type": "number"
+        },
+        "transition": {
+          "$ref": "#/$defs/Transition"
+        },
+        "text_animation": {
+          "default": "fade-in",
+          "enum": [
+            "none",
+            "fade-in",
+            "stagger"
+          ],
+          "title": "Text Animation",
+          "type": "string"
+        }
+      },
+      "title": "Defaults",
+      "type": "object"
+    },
+    "Fonts": {
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "default": "NotoSans-ExtraBold",
+          "description": "Font file name (without extension) or a project-relative path",
+          "title": "Heading",
+          "type": "string"
+        },
+        "body": {
+          "default": "NotoSans-Medium",
+          "title": "Body",
+          "type": "string"
+        }
+      },
+      "title": "Fonts",
+      "type": "object"
+    },
+    "ImageSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "src": {
+          "description": "Path relative to the project directory, e.g. assets/photo.jpg",
+          "title": "Src",
+          "type": "string"
+        },
+        "fit": {
+          "default": "cover",
+          "enum": [
+            "cover",
+            "contain"
+          ],
+          "title": "Fit",
+          "type": "string"
+        },
+        "motion": {
+          "anyOf": [
+            {
+              "enum": [
+                "none",
+                "zoom-in",
+                "zoom-out",
+                "pan-left",
+                "pan-right"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Motion"
+        },
+        "focus": {
+          "default": [
+            0.5,
+            0.5
+          ],
+          "description": "Crop focus point (x, y) in 0..1",
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Focus",
+          "type": "array"
+        }
+      },
+      "required": [
+        "src"
+      ],
+      "title": "ImageSpec",
+      "type": "object"
+    },
+    "Insets": {
+      "additionalProperties": false,
+      "properties": {
+        "top": {
+          "default": 0,
+          "title": "Top",
+          "type": "integer"
+        },
+        "bottom": {
+          "default": 0,
+          "title": "Bottom",
+          "type": "integer"
+        },
+        "left": {
+          "default": 0,
+          "title": "Left",
+          "type": "integer"
+        },
+        "right": {
+          "default": 0,
+          "title": "Right",
+          "type": "integer"
+        }
+      },
+      "title": "Insets",
+      "type": "object"
+    },
+    "LayoutStyle": {
+      "additionalProperties": false,
+      "description": "Visual knobs per layout; set in templates (`layouts:`) or per scene (`style:`).",
+      "properties": {
+        "align": {
+          "default": "center",
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ],
+          "title": "Align",
+          "type": "string"
+        },
+        "valign": {
+          "default": "middle",
+          "enum": [
+            "top",
+            "middle",
+            "bottom"
+          ],
+          "title": "Valign",
+          "type": "string"
+        },
+        "bullet": {
+          "default": "\u2022",
+          "title": "Bullet",
+          "type": "string"
+        },
+        "stagger": {
+          "default": 0.45,
+          "description": "Delay between staggered elements (s)",
+          "minimum": 0,
+          "title": "Stagger",
+          "type": "number"
+        },
+        "title_scale": {
+          "default": 1.0,
+          "title": "Title Scale",
+          "type": "number"
+        },
+        "body_scale": {
+          "default": 1.0,
+          "title": "Body Scale",
+          "type": "number"
+        },
+        "uppercase_title": {
+          "default": false,
+          "title": "Uppercase Title",
+          "type": "boolean"
+        },
+        "panel": {
+          "default": false,
+          "description": "Draw a translucent panel behind the text",
+          "title": "Panel",
+          "type": "boolean"
+        },
+        "panel_opacity": {
+          "default": 0.75,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Panel Opacity",
+          "type": "number"
+        },
+        "accent_bar": {
+          "default": false,
+          "description": "Draw a short accent bar above the title",
+          "title": "Accent Bar",
+          "type": "boolean"
+        },
+        "text_color": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Text Color"
+        },
+        "title_color": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Title Color"
+        }
+      },
+      "title": "LayoutStyle",
+      "type": "object"
+    },
+    "Scene": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Stable kebab-case identifier (defaults to scene-N)",
+          "title": "Id"
+        },
+        "layout": {
+          "enum": [
+            "title",
+            "text",
+            "bullets",
+            "image",
+            "image-caption",
+            "split",
+            "quote",
+            "stat",
+            "outro"
+          ],
+          "title": "Layout",
+          "type": "string"
+        },
+        "duration": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 30,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Title"
+        },
+        "subtitle": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subtitle"
+        },
+        "body": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Body"
+        },
+        "bullets": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bullets"
+        },
+        "quote": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quote"
+        },
+        "author": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Author"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        },
+        "caption": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Caption"
+        },
+        "image": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ImageSpec"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "background": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Background"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "transition": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Transition"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Transition INTO this scene from the previous one"
+        },
+        "text_animation": {
+          "anyOf": [
+            {
+              "enum": [
+                "none",
+                "fade-in",
+                "stagger"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Text Animation"
+        },
+        "style": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LayoutStyle"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "layout"
+      ],
+      "title": "Scene",
+      "type": "object"
+    },
+    "Sizes": {
+      "additionalProperties": false,
+      "description": "Font sizes in px at 1080px canvas width (scaled for other widths).",
+      "properties": {
+        "title": {
+          "default": 104,
+          "title": "Title",
+          "type": "integer"
+        },
+        "subtitle": {
+          "default": 54,
+          "title": "Subtitle",
+          "type": "integer"
+        },
+        "body": {
+          "default": 60,
+          "title": "Body",
+          "type": "integer"
+        },
+        "caption": {
+          "default": 42,
+          "title": "Caption",
+          "type": "integer"
+        },
+        "stat": {
+          "default": 280,
+          "title": "Stat",
+          "type": "integer"
+        },
+        "handle": {
+          "default": 34,
+          "title": "Handle",
+          "type": "integer"
+        }
+      },
+      "title": "Sizes",
+      "type": "object"
+    },
+    "Theme": {
+      "additionalProperties": false,
+      "properties": {
+        "colors": {
+          "$ref": "#/$defs/Colors"
+        },
+        "fonts": {
+          "$ref": "#/$defs/Fonts"
+        },
+        "sizes": {
+          "$ref": "#/$defs/Sizes"
+        },
+        "padding": {
+          "default": 90,
+          "description": "Inner margin in px at 1080 width",
+          "title": "Padding",
+          "type": "integer"
+        },
+        "line_spacing": {
+          "default": 1.18,
+          "title": "Line Spacing",
+          "type": "number"
+        },
+        "safe_area": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Insets"
+          },
+          "description": "Extra per-format insets keeping text clear of platform UI",
+          "propertyNames": {
+            "enum": [
+              "square",
+              "vertical",
+              "portrait"
+            ]
+          },
+          "title": "Safe Area",
+          "type": "object"
+        }
+      },
+      "title": "Theme",
+      "type": "object"
+    },
+    "Transition": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "default": "fade",
+          "enum": [
+            "none",
+            "fade",
+            "fadeblack",
+            "slideleft",
+            "slideright",
+            "slideup",
+            "slidedown",
+            "wipeleft",
+            "wiperight",
+            "circleopen",
+            "smoothleft",
+            "smoothup",
+            "dissolve"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "duration": {
+          "default": 0.5,
+          "maximum": 2,
+          "minimum": 0,
+          "title": "Duration",
+          "type": "number"
+        }
+      },
+      "title": "Transition",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": 1,
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "title": "Description",
+      "type": "string"
+    },
+    "template": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Template"
+    },
+    "format": {
+      "anyOf": [
+        {
+          "enum": [
+            "square",
+            "vertical",
+            "portrait"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Format"
+    },
+    "fps": {
+      "default": 30,
+      "maximum": 60,
+      "minimum": 12,
+      "title": "Fps",
+      "type": "integer"
+    },
+    "theme": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Theme"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "defaults": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Defaults"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "layouts": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/LayoutStyle"
+          },
+          "propertyNames": {
+            "enum": [
+              "title",
+              "text",
+              "bullets",
+              "image",
+              "image-caption",
+              "split",
+              "quote",
+              "stat",
+              "outro"
+            ]
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Layouts"
+    },
+    "branding": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Branding"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "intro": {
+      "default": true,
+      "description": "Include the template's intro scenes",
+      "title": "Intro",
+      "type": "boolean"
+    },
+    "outro": {
+      "default": true,
+      "description": "Include the template's outro scenes",
+      "title": "Outro",
+      "type": "boolean"
+    },
+    "scenes": {
+      "items": {
+        "$ref": "#/$defs/Scene"
+      },
+      "minItems": 1,
+      "title": "Scenes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "title",
+    "scenes"
+  ],
+  "title": "Explainer video script",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

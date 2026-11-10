@@ -1,0 +1,19 @@
+# pattern: quote-card
+# when: a single memorable quote or principle; very short (~10-12s).
+# shape: optional hook -> quote -> one-line takeaway
+version: 1
+title: "TITLE"
+scenes:
+  - id: hook
+    layout: title
+    duration: 2.5
+    title: Words to *build* by
+  - id: quote
+    layout: quote
+    duration: 5
+    quote: The quote goes here, with an *accent* on the key idea.
+    author: Author Name
+  - id: takeaway
+    layout: text
+    duration: 3.5
+    body: One sentence on why this matters today.

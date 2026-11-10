@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% from "_macros.html" import video_card %}
+{% block title %}{{ p.meta.name }} · explainer{% endblock %}
+{% block crumbs %}<a href="/">projects</a> / <span>{{ p.slug }}</span>{% endblock %}
+{% block content %}
+<h1>{{ p.meta.name }}</h1>
+{% if p.meta.description %}<p class="lead">{{ p.meta.description }}</p>{% endif %}
+<dl class="facts">
+  <dt>template</dt><dd>{{ p.meta.template }}</dd>
+  <dt>default format</dt><dd>{{ p.meta.format or "template default" }}</dd>
+  {% if p.meta.branding and p.meta.branding.handle %}<dt>handle</dt><dd>{{ p.meta.branding.handle }}</dd>{% endif %}
+  <dt>path</dt><dd><code>{{ p.path }}</code></dd>
+</dl>
+
+<h2>Videos <span class="count">{{ videos|length }}</span></h2>
+{% if not videos %}<p class="empty">No scripts yet. Create one with <code>explainer new {{ p.slug }} SLUG</code>.</p>{% endif %}
+<div class="grid videos">
+  {% for v in videos %}{{ video_card(p, v) }}{% endfor %}
+</div>
+
+<h2>Assets <span class="count">{{ assets|length }}</span></h2>
+{% if not assets %}<p class="empty">No assets in <code>assets/</code>.</p>{% endif %}
+<div class="grid assets">
+  {% for a in assets %}
+  <a class="asset" href="{{ a.url }}" target="_blank" rel="noopener">
+    {% if a.image %}<img src="{{ a.url }}" alt="{{ a.name }}" loading="lazy">{% else %}<div class="placeholder">file</div>{% endif %}
+    <span>{{ a.name }}</span>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

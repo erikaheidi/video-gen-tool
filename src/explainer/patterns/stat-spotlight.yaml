@@ -1,0 +1,28 @@
+# pattern: stat-spotlight
+# when: a data point carries the story. Lead with the number.
+# shape: big stat -> what it means (text) -> why (bullets) -> what to do (title)
+version: 1
+title: "TITLE"
+scenes:
+  - id: stat
+    layout: stat
+    duration: 3.5
+    title: Did you know?
+    value: "84%"
+    caption: of something surprising happens
+  - id: meaning
+    layout: text
+    duration: 4
+    title: What it means
+    body: One sentence interpreting the number.
+  - id: why
+    layout: bullets
+    duration: 5
+    title: Why
+    text_animation: stagger
+    bullets: [Reason one, Reason two, Reason three]
+  - id: action
+    layout: title
+    duration: 3
+    title: Here's what to *do*
+    subtitle: One concrete action

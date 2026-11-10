@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../../../schema/video.schema.json
+version: 1
+title: What is an SBOM?
+description: A 25-second primer showing every layout.
+scenes:
+  - id: hook
+    layout: title
+    duration: 3
+    title: Do you know what's *inside* your containers?
+    background: { image: assets/containers.jpg, overlay: 0.6, motion: zoom-in }
+
+  - id: definition
+    layout: text
+    duration: 4.5
+    title: SBOM
+    body: A *Software Bill of Materials* is an ingredient list for your software.
+
+  - id: contents
+    layout: bullets
+    duration: 4.5
+    title: It tells you
+    text_animation: stagger
+    bullets:
+      - Every package inside
+      - The exact *versions*
+      - Licenses and suppliers
+
+  - id: stat
+    layout: stat
+    duration: 3.5
+    title: Open source is everywhere
+    value: "96%"
+    caption: of codebases contain open source components
+
+  - id: picture
+    layout: image-caption
+    duration: 4.5
+    image: assets/laptop.png
+    title: Generate one at build time
+    caption: Most build tools can emit SPDX or CycloneDX
+
+  - id: network
+    layout: image
+    duration: 3.5
+    image: { src: assets/network.jpg, motion: pan-left }
+    title: Track every dependency
+    caption: Across your whole supply chain
+
+  - id: split
+    layout: split
+    duration: 4
+    image: assets/containers.jpg
+    title: Scan for CVEs
+    body: Match your SBOM against vulnerability feeds in seconds.
+
+  - id: quote
+    layout: quote
+    duration: 4
+    quote: You can't secure what you can't *see*.
+    author: Every security team, ever

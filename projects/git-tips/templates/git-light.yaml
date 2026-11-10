@@ -1,0 +1,7 @@
+name: git-light
+extends: clean-light
+description: clean-light with Git orange accent and hard-cut list items.
+theme:
+  colors: { accent: "#e8590c" }
+layouts:
+  text: { accent_bar: true }

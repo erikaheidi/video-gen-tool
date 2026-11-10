@@ -1,0 +1,8 @@
+name: Demo
+description: Sample project showing every layout — a short explainer about SBOMs.
+template: bold-vertical
+format: vertical
+branding:
+  handle: "@erikaheidi"
+  logo: assets/logo.png
+tags: [sample, security]

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../../schema/video.schema.json
+version: 1
+title: "3 Git commands you're not using"
+description: "Listicle pattern, text-only."
+scenes:
+  - id: hook
+    layout: title
+    duration: 3
+    title: "*3* Git commands you're not using"
+  - id: item-1
+    layout: text
+    duration: 5
+    title: "#1  git switch -"
+    body: Jump back to the *previous branch*, like cd - for Git.
+    transition: none
+  - id: item-2
+    layout: text
+    duration: 5
+    title: "#2  git restore -p"
+    body: Discard changes *hunk by hunk* instead of losing the whole file.
+    transition: none
+  - id: item-3
+    layout: text
+    duration: 5
+    title: "#3  git commit --fixup"
+    body: Mark a fix for an older commit, then squash it with *autosquash*.
+    transition: none
+  - id: recap
+    layout: bullets
+    duration: 5
+    title: Recap
+    text_animation: stagger
+    bullets: [switch - to go back, restore -p to undo, commit --fixup to amend]
+  - id: cta
+    layout: title
+    duration: 3
+    title: Save this for your *next PR*

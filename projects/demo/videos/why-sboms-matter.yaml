@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../../schema/video.schema.json
+version: 1
+title: "Why SBOMs matter"
+description: "Brief: 30s vertical on why SBOMs matter. Pattern: hook-points-cta."
+scenes:
+  - id: hook
+    layout: title
+    duration: 3
+    title: What's *inside* your software?
+    background: { image: assets/containers.jpg, overlay: 0.62, motion: zoom-in }
+
+  - id: context
+    layout: text
+    duration: 4.5
+    title: SBOM
+    body: A *Software Bill of Materials* lists every component your app ships with.
+
+  - id: stat
+    layout: stat
+    duration: 3.5
+    title: Open source is everywhere
+    value: "96%"
+    caption: of codebases contain open source
+
+  - id: points
+    layout: bullets
+    duration: 5.5
+    title: With an SBOM you can
+    text_animation: stagger
+    bullets:
+      - Find *CVEs* in seconds
+      - Prove license compliance
+      - Answer audits fast
+
+  - id: supply-chain
+    layout: image
+    duration: 3.5
+    image: { src: assets/network.jpg, motion: pan-right }
+    title: See your whole *supply chain*
+
+  - id: how
+    layout: image-caption
+    duration: 4
+    image: { src: assets/laptop.png, fit: contain }
+    title: Generate it at *build time*
+    caption: One CI step — SPDX or CycloneDX
+
+  - id: cta
+    layout: title
+    duration: 3
+    title: Add an SBOM step to *CI* today

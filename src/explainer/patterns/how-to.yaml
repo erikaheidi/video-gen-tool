@@ -1,0 +1,36 @@
+# pattern: how-to
+# when: step-by-step instructions. Each step is a scene; use images of each step when assets exist.
+# shape: hook (title) -> what you need (bullets) -> step scenes (image-caption if assets, else text) -> result -> CTA
+version: 1
+title: "TITLE"
+scenes:
+  - id: hook
+    layout: title
+    duration: 3
+    title: How to X in *3 steps*
+  - id: needs
+    layout: bullets
+    duration: 4
+    title: You'll need
+    text_animation: stagger
+    bullets: [Tool one, Tool two]
+  - id: step-1
+    layout: text
+    duration: 3.5
+    title: Step 1
+    body: Do the first thing.
+  - id: step-2
+    layout: text
+    duration: 3.5
+    title: Step 2
+    body: Do the second thing.
+  - id: step-3
+    layout: text
+    duration: 3.5
+    title: Step 3
+    body: Do the third thing.
+  - id: result
+    layout: title
+    duration: 3
+    title: That's it — *done*
+    subtitle: What the viewer gets

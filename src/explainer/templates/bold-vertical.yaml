@@ -1,0 +1,30 @@
+name: bold-vertical
+description: High-contrast dark navy with a yellow accent. Big, punchy headlines. Best for vertical (Reels/Shorts/TikTok).
+formats: [vertical, portrait, square]
+theme:
+  colors: { background: "#0f172a", text: "#f8fafc", accent: "#facc15", muted: "#94a3b8", panel: "#1e293b" }
+  fonts: { heading: NotoSans-ExtraBold, body: NotoSans-Medium }
+  sizes: { title: 108, subtitle: 54, body: 62, caption: 44, stat: 300, handle: 34 }
+  padding: 90
+defaults:
+  duration: 4
+  transition: { type: fade, duration: 0.45 }
+  text_animation: fade-in
+layouts:
+  title:   { align: center, valign: middle, accent_bar: true, title_scale: 1.1 }
+  text:    { align: left, valign: middle, accent_bar: true }
+  bullets: { align: left, valign: middle, bullet: "→", stagger: 0.5 }
+  image:   { align: left, valign: bottom, panel: false }
+  image-caption: { align: center, valign: top }
+  split:   { align: left, valign: middle }
+  quote:   { align: left, valign: middle }
+  stat:    { align: center, valign: middle }
+  outro:   { align: center, valign: middle }
+branding: { position: bottom-center, opacity: 0.8 }
+outro:
+  - id: follow
+    layout: outro
+    duration: 3
+    title: Follow for more
+    subtitle: "{handle}"
+    transition: { type: fadeblack, duration: 0.5 }

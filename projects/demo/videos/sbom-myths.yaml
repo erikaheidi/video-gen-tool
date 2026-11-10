@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../../schema/video.schema.json
+version: 1
+template: dark-square
+format: square
+title: "SBOM myths"
+description: "Myth-vs-fact pattern in square format for feed posts."
+scenes:
+  - id: hook
+    layout: title
+    duration: 3
+    title: "*2* SBOM myths, busted"
+  - id: myth-1
+    layout: text
+    duration: 3.5
+    title: MYTH
+    body: SBOMs are only for compliance paperwork.
+    style: { title_color: "#f87171" }
+  - id: fact-1
+    layout: text
+    duration: 4.5
+    title: FACT
+    body: They let you find *vulnerable packages* in seconds when a new CVE drops.
+    transition: { type: slideleft, duration: 0.35 }
+    style: { title_color: "#4ade80" }
+  - id: myth-2
+    layout: text
+    duration: 3.5
+    title: MYTH
+    body: Generating an SBOM is slow and manual.
+    style: { title_color: "#f87171" }
+  - id: fact-2
+    layout: text
+    duration: 4.5
+    title: FACT
+    body: Most build tools emit one *automatically* — add a single CI step.
+    transition: { type: slideleft, duration: 0.35 }
+    style: { title_color: "#4ade80" }
+  - id: takeaway
+    layout: title
+    duration: 3.5
+    title: Now you *know*
+    subtitle: Ship an SBOM with every release

@@ -1,0 +1,10 @@
+name: dark-square
+extends: bold-vertical
+description: The bold-vertical look tuned for 1:1 square posts (feeds, LinkedIn) — tighter type, cyan accent.
+formats: [square, portrait]
+theme:
+  colors: { accent: "#22d3ee", background: "#111111", panel: "#1f1f1f" }
+  sizes: { title: 92, subtitle: 48, body: 54, caption: 40, stat: 240 }
+  padding: 80
+defaults:
+  transition: { type: slideleft, duration: 0.4 }

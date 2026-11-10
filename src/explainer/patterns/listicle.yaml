@@ -1,0 +1,36 @@
+# pattern: listicle
+# when: "N things / N tips / N mistakes". One scene per item keeps pace high.
+# shape: hook ("3 ... you should know") -> item scenes (text with numbered kicker) -> recap (bullets) -> CTA
+# length: 2 + N + 1 scenes + outro; keep N between 3 and 5
+version: 1
+title: "TITLE"
+scenes:
+  - id: hook
+    layout: title
+    duration: 3
+    title: "*3* things every X should know"
+  - id: item-1
+    layout: text
+    duration: 3.5
+    title: "#1"
+    body: First tip, one sentence.
+  - id: item-2
+    layout: text
+    duration: 3.5
+    title: "#2"
+    body: Second tip, one sentence.
+  - id: item-3
+    layout: text
+    duration: 3.5
+    title: "#3"
+    body: Third tip, one sentence.
+  - id: recap
+    layout: bullets
+    duration: 4.5
+    title: Recap
+    text_animation: stagger
+    bullets: [Tip one, Tip two, Tip three]
+  - id: cta
+    layout: title
+    duration: 3
+    title: Save this for *later*
