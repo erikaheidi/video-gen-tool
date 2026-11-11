@@ -1,0 +1,16 @@
+version: 1
+environment:
+  # The VM starts with only BusyBox + GNU tar. ffmpeg (with libx264) and the
+  # Noto fonts are needed by the render tests; without them those tests skip.
+  packages: [python-3.13, py3.13-pip, ffmpeg, font-noto]
+checks:
+  test:
+    description: Install the package with dev extras and run the pytest suite, including ffmpeg render tests.
+    script: |
+      python3 -m venv /var/tmp/venv
+      . /var/tmp/venv/bin/activate
+      pip install -q -e '.[dev]'
+      pytest -q
+    timeout: 20m
+    network:
+      egress: [pypi.org, files.pythonhosted.org]

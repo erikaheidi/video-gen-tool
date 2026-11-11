@@ -51,7 +51,7 @@ Formats: `vertical` for Reels, Shorts, TikTok, and Stories; `square` for feed po
 - Use `motion: zoom-in` for hooks and `pan-left` or `pan-right` for wide images. Don't put motion on every scene.
 
 ## Worked example (brief → YAML)
-Brief: *"30s vertical for the demo project: why teams should generate SBOMs. Audience: developers. CTA: add it to CI."*
+Brief: *"30s vertical for the sboms-101 project: why teams should generate SBOMs. Audience: developers. CTA: add it to CI."*
 
 ```yaml
 version: 1

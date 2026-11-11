@@ -58,7 +58,7 @@ The layouts are `title`, `text`, `bullets`, `image`, `image-caption`, `split`, `
 Narrative patterns (`explainer patterns`) are scaffolds for common story shapes: hook-points-cta, problem-solution, listicle, how-to, myth-vs-fact, stat-spotlight, and quote-card.
 
 ## Generating videos from a brief with Claude Code
-The `explainer-video` skill (`.claude/skills/explainer-video/`) tells Claude how to turn a brief into a script, validate it, check the stills visually, and render it. For example: *"Make a 30s vertical video for the demo project on why SBOMs matter, CTA: add it to CI."*
+The `explainer-video` skill (`.claude/skills/explainer-video/`) tells Claude how to turn a brief into a script, validate it, check the stills visually, and render it. For example: *"Make a 30s vertical video for the sboms-101 project on why SBOMs matter, CTA: add it to CI."*
 
 ## Tests
 ```bash
