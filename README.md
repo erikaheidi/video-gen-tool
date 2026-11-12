@@ -1,6 +1,6 @@
 # explainer
 
-Generate short, silent, slideshow-style explainer videos for social media (square, vertical 9:16, or portrait 4:5) from YAML scripts. Pillow lays out each scene; ffmpeg adds motion (Ken Burns zoom and pan, text fade-ins, staggered bullets) and transitions, and encodes the H.264 MP4.
+Generate short, slideshow-style "explainer" videos for social media (square, vertical 9:16, or portrait 4:5) from YAML scripts. Pillow lays out each scene; ffmpeg adds motion (Ken Burns zoom and pan, text fade-ins, staggered bullets) and transitions, and encodes the H.264 MP4.
 
 ```
 projects/<project>/
