@@ -1,7 +1,8 @@
 version: 1
 environment:
   # The VM starts with only BusyBox + GNU tar. ffmpeg (with libx264) and the
-  # Noto fonts are needed by the render tests; without them those tests skip.
+  # Noto fonts are needed by the render tests and by `explainer validate`
+  # (text-fit checks measure real fonts); without them render tests skip.
   packages: [python-3.13, py3.13-pip, ffmpeg, font-noto]
 checks:
   test:
@@ -12,5 +13,88 @@ checks:
       pip install -q -e '.[dev]'
       pytest -q
     timeout: 20m
+    network:
+      egress: [pypi.org, files.pythonhosted.org]
+
+  validate-samples:
+    description: >-
+      Run `explainer validate --strict` on every sample project, so a change to the schema,
+      templates, layout code or the samples themselves can't leave a sample broken or with warnings.
+    script: |
+      python3 -m venv /var/tmp/venv
+      . /var/tmp/venv/bin/activate
+      pip install -q -e .
+      for p in projects/*/project.yaml; do
+        explainer validate "$(basename "$(dirname "$p")")" --strict
+      done
+    when:
+      changed: ["projects/**", "src/**", "pyproject.toml"]
+    timeout: 10m
+    network:
+      egress: [pypi.org, files.pythonhosted.org]
+
+  schema-in-sync:
+    description: >-
+      Regenerate the JSON Schema from src/explainer/schema.py and fail if it differs from the
+      committed schema/video.schema.json. Fix by running `explainer schema` and committing the result.
+    script: |
+      python3 -m venv /var/tmp/venv
+      . /var/tmp/venv/bin/activate
+      pip install -q -e .
+      explainer schema -o /var/tmp/video.schema.json >/dev/null
+      if ! diff -u schema/video.schema.json /var/tmp/video.schema.json; then
+        echo "::error file=schema/video.schema.json::Out of date with src/explainer/schema.py. Run 'explainer schema' and commit the result."
+        exit 1
+      fi
+    when:
+      changed: ["src/explainer/schema.py", "schema/**", "pyproject.toml"]
+    timeout: 10m
+    network:
+      egress: [pypi.org, files.pythonhosted.org]
+
+  package-install:
+    description: >-
+      Do a regular (non-editable) install and check that every data file under src/explainer
+      (templates, patterns, web files) was packaged, then smoke-test the installed CLI and web UI.
+      Catches files that don't match the package-data globs in pyproject.toml.
+    script: |
+      python3 -m venv /var/tmp/venv
+      . /var/tmp/venv/bin/activate
+      pip install -q '.[dev]'
+      # Run from outside the repo so nothing can be imported from the source tree.
+      cd /var/tmp
+      python3 - <<'EOF'
+      import sys
+      from importlib import resources
+      from pathlib import Path
+
+      src = Path("/work/src/explainer")
+      installed = Path(str(resources.files("explainer")))
+      assert not installed.is_relative_to("/work"), f"imported from the source tree: {installed}"
+
+      def data_files(root):
+          return {p.relative_to(root).as_posix() for p in root.rglob("*")
+                  if p.is_file() and p.suffix not in (".py", ".pyc") and "__pycache__" not in p.parts}
+
+      missing = sorted(data_files(src) - data_files(installed))
+      for m in missing:
+          print(f"::error file=src/explainer/{m}::Not included in the installed package; add it to [tool.setuptools.package-data] in pyproject.toml")
+      if missing:
+          sys.exit(1)
+      print(f"all {len(data_files(src))} data files packaged")
+
+      from fastapi.testclient import TestClient
+      from explainer.web.app import create_app
+      client = TestClient(create_app("/work/projects"))
+      for url in ["/", "/static/style.css"]:
+          r = client.get(url)
+          assert r.status_code == 200, f"GET {url} -> {r.status_code}"
+      print("web UI ok")
+      EOF
+      explainer templates
+      explainer patterns
+    when:
+      changed: ["src/**", "pyproject.toml"]
+    timeout: 10m
     network:
       egress: [pypi.org, files.pythonhosted.org]

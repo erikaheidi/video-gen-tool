@@ -17,6 +17,9 @@ python3 -m venv .venv && .venv/bin/pip install -e '.[dev]'   # needs Python 3.11
 ```
 Other subcommands: `init`, `new`, `list`, `templates`, `patterns`, `assets`, `clean`.
 
+## CI
+Chainguard Checks, configured in [.chainguard/ci.yaml](.chainguard/ci.yaml) (not GitHub Actions). Checks: `test` (pytest), `validate-samples` (`explainer validate --strict` on every project), `schema-in-sync` (committed JSON Schema matches `schema.py`), `package-install` (non-editable install packages every data file). Each VM starts empty: tools go in `environment.packages` (Wolfi names) and network hosts in `network.egress`. After editing, run `chainctl checks validate .` (works offline). Docs: https://www.chainguard.dev/docs/chainguard/checks/configuration.md (append `.md` to any docs URL to get Markdown).
+
 ## Video requests
 When the user gives a brief or asks for a video, reel, or short, or asks to edit a script YAML, use the **`explainer-video` skill** ([.claude/skills/explainer-video/SKILL.md](.claude/skills/explainer-video/SKILL.md)). It covers the workflow: brief → pattern → YAML → validate → stills QA → render. Copy rules are in its `references/patterns.md`.
 
