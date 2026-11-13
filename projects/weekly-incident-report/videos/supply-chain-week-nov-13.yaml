@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=../../../schema/video.schema.json
+version: 1
+title: "Supply chain week: top 5 (Nov 9–13, 2026)"
+description: >
+  Listicle recap of the week's top software supply chain incidents.
+  Sources: Aikido/Help Net Security (wfx-loot), StepSecurity/Socket (bee-js),
+  SecurityWeek (Red Hat Quay), GitHub malware advisories (npm typosquats),
+  StepSecurity (apt CVE-2026-109518).
+scenes:
+  - id: hook
+    layout: title
+    duration: 3.5
+    title: "*5* supply chain attacks this week"
+    subtitle: Nov 9–13, 2026
+    background: { image: assets/network.jpg, overlay: 0.65, motion: zoom-in }
+
+  - id: item-1
+    layout: text
+    duration: 5
+    title: "#1 GitHub Actions"
+    body: Stolen GitHub tokens planted a *CI secret stealer* in thousands of repos.
+
+  - id: item-1-stat
+    layout: stat
+    duration: 3.5
+    title: wfx-loot ran in
+    value: "1,800+"
+    caption: repos, from 4,837 hijacked accounts
+
+  - id: item-2
+    layout: text
+    duration: 5
+    title: "#2 npm: bee-js 13.3.0"
+    body: The project's *own CI* published malware to npm. Live for 75 minutes.
+
+  - id: item-3
+    layout: stat
+    duration: 4
+    title: "#3 Red Hat Quay"
+    value: "9.8"
+    caption: CVSS. Attackers can *overwrite* private images.
+
+  - id: item-4
+    layout: text
+    duration: 5
+    title: "#4 npm typosquats"
+    body: Fake *crypto dev* packages like ganach and uniswa-v2-sdk compromise the whole machine.
+
+  - id: item-5
+    layout: image
+    duration: 4.5
+    title: "#5 apt flaw"
+    caption: Package swapped after verification runs as *root*
+    image: { src: assets/containers.jpg, motion: zoom-out }
+    style: { panel: true, panel_opacity: 0.8 }
+
+  - id: recap
+    layout: bullets
+    duration: 6
+    title: Do this *now*
+    text_animation: stagger
+    bullets:
+      - Rotate reachable CI secrets
+      - Audit recent workflow runs
+      - Pin and verify dependencies
+      - Patch Quay and apt
+
+  - id: cta
+    layout: title
+    duration: 3
+    title: Save this and *rotate* your secrets
+    transition: fadeblack

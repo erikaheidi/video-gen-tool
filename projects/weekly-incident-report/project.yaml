@@ -1,0 +1,8 @@
+name: Weekly Incident Report
+description: Weekly roundup of the top software supply chain incidents (CI/CD, malware, CVEs).
+template: bold-vertical
+format: vertical
+branding:
+  handle: '@erikaheidi'
+  logo: assets/logo.png
+tags: [security, supply-chain, weekly]
