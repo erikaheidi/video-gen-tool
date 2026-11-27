@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=../../../schema/video.schema.json
+version: 1
+template: dark-square
+format: square
+title: "Supply chain week: top 4 (Nov 23–27, 2026) — LinkedIn"
+description: >
+  Listicle recap of the week's top software supply chain incidents.
+  Sources: Security Affairs / The Next Web / Der Spiegel (SAP incident),
+  StepSecurity (PolinRider in AsyncAPI, CircuitVerse, Open Food Facts PRs),
+  The Hacker News / AhnLab (SoftwareOK Q-Dir & DesktopOK installers),
+  GitHub malware advisories via Helix ThreatWatch (boxy-* and other npm packages).
+scenes:
+  - id: hook
+    layout: title
+    duration: 3.5
+    title: "*4* supply chain hits this week"
+    subtitle: Nov 23–27, 2026
+    background: { image: assets/network.jpg, overlay: 0.65, motion: zoom-in }
+
+  - id: item-1
+    layout: text
+    duration: 5
+    title: "#1 SAP"
+    body: SAP confirms an incident. Reports say *stolen tokens* were used to alter GitHub code.
+
+  - id: item-1-note
+    layout: bullets
+    duration: 5
+    title: What we know
+    text_animation: stagger
+    bullets:
+      - No customer data touched, says SAP
+      - Token theft *not yet* confirmed
+
+  - id: item-2
+    layout: text
+    duration: 5
+    title: "#2 Poisoned pull requests"
+    body: Force-pushed commits hid the *PolinRider* loader in open PRs at three projects.
+
+  - id: item-2-stat
+    layout: stat
+    duration: 4.5
+    title: CircuitVerse CI shipped
+    value: "40"
+    caption: release installers built from *poisoned* PRs
+
+  - id: item-3
+    layout: split
+    duration: 5
+    title: "#3 Official downloads"
+    body: Q-Dir and DesktopOK installers dropped a *Python RAT*
+    image: { src: assets/containers.jpg }
+
+  - id: item-4
+    layout: text
+    duration: 5
+    title: "#4 npm malware"
+    body: Seven *boxy* packages and fake AI agent setups steal *host secrets*.
+
+  - id: recap
+    layout: bullets
+    duration: 6
+    title: Do this *now*
+    text_animation: stagger
+    bullets:
+      - Require approval for fork CI
+      - Rotate tokens touching GitHub
+      - Reinstall SoftwareOK tools clean
+      - Audit new npm installs
+
+  - id: cta
+    layout: title
+    duration: 3
+    title: Save this and *gate* your CI
+    transition: fadeblack
