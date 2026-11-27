@@ -25,7 +25,7 @@ scenes:
 
   - id: item-1-note
     layout: bullets
-    duration: 4.5
+    duration: 5
     title: What we know
     text_animation: stagger
     bullets:
@@ -40,7 +40,7 @@ scenes:
 
   - id: item-2-stat
     layout: stat
-    duration: 3.5
+    duration: 4.5
     title: CircuitVerse CI shipped
     value: "40"
     caption: release installers built from *poisoned* PRs
